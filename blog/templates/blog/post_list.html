@@ -3,10 +3,11 @@
  <h2>{{post.author}} Posts</h2>
     {% for post in posts %}
         <div>
-            <h3>{{ post.title }}</h3>
-            <ul><p>{{ post.content }}</p></ul><br>
-            <p><em>By {{ post.author }} on {{ post.created_at }}</em></p>
+            <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+            <ul><p>{{ post.content|truncatewords:30 }}</p></ul>
+            <p><em>By {{ post.author }} on {{ post.created_at }}</em></p><br>
         </div>
+        <hr>
     {% empty %}
         <p>No posts available.</p>
     {% endfor %}
