@@ -3,4 +3,7 @@
     <h3>{{ post.title }}</h3>
     <p>{{ post.content }}</p><br>
     <p><em>By {{ post.author }} on {{ post.created_at }}</em></p>
+
+    <button><a href="{% url 'update_post' post.pk %}">Edit Post</a></button>
+    <button><a href="{% url 'delete_post' post.pk %}">Delete Post</a></button>
 {% endblock %}

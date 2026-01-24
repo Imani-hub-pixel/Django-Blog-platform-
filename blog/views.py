@@ -28,3 +28,13 @@ class PostDetail(DetailView):
     template_name='blog/post_detail.html'
     context_object_name = 'post'
 
+class UpdatePost(UpdateView):
+    model=Post
+    fields='__all__'
+    template_name='blog/post_form.html'
+    success_url=reverse_lazy('post_list')
+
+class DeletePost(DeleteView):
+    model=Post
+    template_name='blog/delete_post.html'
+    success_url=reverse_lazy('post_list')
