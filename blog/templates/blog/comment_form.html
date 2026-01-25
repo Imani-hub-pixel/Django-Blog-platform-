@@ -1,0 +1,11 @@
+{% extends "blog/main.html" %}
+
+{% block content %}
+<h2>Edit Your Comment</h2>
+<form method="POST" enctype="multipart/form-data"> >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update Comment</button>
+    <a href="{% url 'post_detail' form.instance.post.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

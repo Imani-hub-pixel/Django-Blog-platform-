@@ -6,4 +6,26 @@
 
     <button><a href="{% url 'update_post' post.pk %}">Edit Post</a></button>
     <button><a href="{% url 'delete_post' post.pk %}">Delete Post</a></button>
+    {% if post.comments.exists %}
+    {% for comment in post.comments.all %}
+        <div class="comment">
+            <p><strong>{{ comment.author.username }}</strong> said:</p>
+            <p>{{ comment.content }}</p>
+            <small>{{ comment.created_at|date:"M d, Y H:i" }}</small>
+                <p>
+                    <a href="{% url 'update_comment' comment.pk %}">Edit</a> |
+                    <a href="{% url 'delete_comment' comment.pk %}">Delete</a>
+                </p>
+            <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endif %}
+<h4>Add a Comment</h4>
+    <form method="POST" action="{% url 'create_comment' post.pk %}">
+        {% csrf_token %}
+        {{comment_form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
 {% endblock %}
